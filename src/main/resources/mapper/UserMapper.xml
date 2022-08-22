@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.duo.kindergartenll.mapper.UserMapper">
+    <!--查询-->
+    <select id="findByUser" resultType="com.duo.kindergartenll.model.User">
+        select user_id userId,user_name userName,user_portrait userPortrait,user_phone userPhone,is_delete isDelete,create_time createTime,create_time createTime,guardian_id guardianId from t_user_info
+        <where>
+            <if test="userName !=null and userName!=''">
+                userName like #{userName}
+            </if>
+        </where>
+            limit #{pageno},#{pagesize};
+    </select>
+
+    <!--查询总记录数-->
+    <select id="getCount" resultType="int">
+        select count(1) from t_user_info
+        <where>
+            <if test="userName !=null and userName !=''">
+                userName like #{userName}
+            </if>
+        </where>
+    </select>
+</mapper>
